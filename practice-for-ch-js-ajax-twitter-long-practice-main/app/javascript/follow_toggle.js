@@ -17,16 +17,34 @@ export default class FollowToggle {
   }
 
   async follow() {
-    // Your code here
+    this.followState = "following";
+    await API.followUser(this.toggleButton.dataset.userId)
+    this.followState = "followed";
   }
 
   async unfollow() {
-    // Your code here
+    this.followState = "unfollowing";
+    await API.unfollowUser(this.toggleButton.dataset.userId)
+    this.followState = "unfollowed";
   }
 
   render() {
     switch (this.followState) {
-      // Your code here
+      case "followed" : 
+        this.toggleButton.disabled = false;
+        this.toggleButton.innerText = "Unfollow!";
+        break;
+      case "unfollowed" :
+        this.toggleButton.disabled = false;
+        this.toggleButton.innerText = "Follow!";
+        break;
+      case "following" : 
+        this.toggleButton.disabled = true;
+        this.toggleButton.innerText = "Following...";
+        break;
+      case "unfollowing" :
+        this.toggleButton.disabled = true;
+        this.toggleButton.innerText = "Unfollowing...";
     }
   }
 

@@ -1,4 +1,3 @@
-// const { custom } = require("babel-loader");
 
 const csrfToken = document.querySelector("meta[name=csrf-token]").content;
 
@@ -19,7 +18,7 @@ async function customFetch(url, options = {}) {
   }
 }
 
-export const foo = "bar";
+// export const foo = "bar";
 
 export const followUser = (id) => {
   return customFetch(`http://localhost:3000/users/${id}/follow`, 
@@ -39,7 +38,14 @@ export const unfollowUser = (id) => {
   )
 }
 
-
+export const fetchTweets = (options= {}) => {
+  let queryParams = new URLSearchParams(options);
+  queryParams = queryParams.toString();
+  return customFetch(`http://localhost:3000/tweets?${queryParams}`, {
+    credentials: "include"
+  }
+  )
+}
 
 
 

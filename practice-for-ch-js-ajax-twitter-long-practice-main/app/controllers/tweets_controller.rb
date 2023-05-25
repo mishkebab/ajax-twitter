@@ -9,8 +9,8 @@ class TweetsController < ApplicationController
   def index
     # simulate latency
     sleep(1)
-    
-    # Your code here
+    @tweets = current_user.page_of_tweets(type: params[:type], offset: params[:offset], limit: nil)
+    render :index
   end
 
   def create
